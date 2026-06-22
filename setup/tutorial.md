@@ -21,6 +21,8 @@ If pumps are not available, an alternative method is to use beakers to fill the 
 
 After filling is complete, the stratification profile is quantified using conductivity measurements. Conductivity probes are lowered through the water column at multiple depths, and the measured conductivity values are converted to salinity and density. These measurements verify the linearity of the density gradient and allow determination of the buoyancy frequency, (N), which governs the propagation characteristics of internal waves. These probes can be expensive, so an open-source alternative that can be explored are Conduino sensors. 
 
+Because density also relies on temperature, mapping conductivity to density is unique each day. If one uses conductivity, calibration is required. We calibrate our readings by taking six samples of increasingly saline saltwater solutions, making sure they are at the same temperature as the stratification. Using a handheld densitometer and conductivity probe (which we detached from the carriage on the side of the tank), we can create a cubic spline that allows us to extract density from conductivity. This avoids intruding on the stratification with a handheld densitometer. 
+
 ## 2. Internal Wave Generation
 
 Once a stable stratification has been established, internal waves are generated through oscillatory forcing of a submerged topographic feature. The topography used in our system follows a hyperbolic secant squared profile,
@@ -31,17 +33,17 @@ where $h_0$ is the maximum topographic height and $l_0$ is half-length of the to
 
 Using Parker Automation software, we drive the motor to oscillate the topography in sinusoidal fashion. This generates internal gravity waves that propagate throughout the tank. The motor and The forcing frequency and amplitude can be adjusted to investigate different regions of the internal-wave dispersion relation while remaining within the linear wave regime. A possible DIY alternative to the forcing mechanism may include a servo motor controlled by a Raspberry Pi computer, or something similar.
 
-## 3.1 Shadowgraph Visualization
+## 3 Shadowgraph Visualization
 
 A simple method for observing the generated waves is shadowgraph imaging. In this technique, a parallel light source is directed through the tank toward a screen (we use a whiteboard). Internal waves create small density gradients that alter the local refractive index of the fluid, causing light rays to bend slightly as they pass through the stratified medium.
 
 These refractive-index variations produce visible fluctuations that reveal wave structure and propagation patterns. Shadowgraph imaging provides an intuitive and inexpensive means of visualizing internal waves, making it well suited for demonstrations and qualitative observations. 
 
-## 3.2 Background-Oriented Schlieren (BOS) Measurements
+## 4 Background-Oriented Schlieren (BOS) Measurements
 
 For quantitative measurements, our primary method is BOS, which utilizes a fixed background pattern positioned behind the tank and multiple high-resolution cameras.
 
-Our three cameras are synchronized with Bobcat software to image the entire wave field, allowing coverage of the full tank while maintaining sufficient spatial resolution. First, we calibrate by taking photos of the tank with freshwater and then our stratification. We also make sure to include a ruler in the shot to find the length scale of a pixel in the frame. As we start oscillation, we capture photos at a frame rate of 2 frames per second. This acquisition rate is sufficient to resolve the relatively slow evolution of the internal-wave dynamics.
+Our three cameras are synchronized with Bobcat software to image the entire wave field, allowing coverage of the full tank at a resolution near 4K (3296 x 2472). First, we calibrate by taking photos of the tank with freshwater and then our stratification. We also make sure to include a ruler in the shot to find the length scale of a pixel in the frame. As we start oscillation, we capture photos at $2 \ \text{Hz}$. This acquisition rate is sufficient to resolve the relatively slow evolution of the internal-wave dynamics.
 
 As internal waves propagate through the stratified fluid, the associated density gradients alter the local refractive index, producing small apparent displacements of the background pattern. These displacements are extracted through image-correlation techniques and converted into refractive-index gradient fields. Using the known relationship between refractive index, density, and salinity, the BOS measurements provide quantitative information about the evolving internal-wave field.
 
