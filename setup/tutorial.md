@@ -5,8 +5,8 @@ Before we discuss how each step is done, we outline the general positioning of o
 * We place the tank on top of a ceramic platform about 2 feet in height
 * We create scaffolding around the tank with aluminum extrusion (80/20), which supports the electronics that drive our two motors. Each motor is attached to a carriage: one that holds the conductivity probe that can move down the height of the tank, and one that holds the topography that can move across the width of the tank.
 * For Shadowgraphing, we place a whiteboard behind the tank. On the opposite side, our heat lamp illuminates the tank. 
-* For Background-Oriented Schlieren (BOS), we place three cameras of equal spacing at eye-level with the tank (scaffolded by 80/20)
-* For BOS, a whiteboard is then placed on the opposite side of the cameras, flush with the tank.
+* For Background-Oriented Schlieren (BOS), we place three cameras of equal spacing at eye-level with the tank, scaffolded by 80/20 and tripods (for reference, we place it 146 cm away from the tank)
+* For BOS, a whiteboard is then placed on the opposite side of the cameras, flush with the tank (for reference we place it 280 cm away from the tank.)
 * For BOS, we also position a projector below the cameras, such that a clear dot pattern illuminates ONLY the whiteboard, and nothing else.
 
 Given these are in place, we begin our first step to produce linear internal waves. 
@@ -45,6 +45,10 @@ For quantitative measurements, our primary method is BOS, which utilizes a fixed
 
 Our three cameras are synchronized with Bobcat software to image the entire wave field, allowing coverage of the full tank at a resolution near 4K (3296 x 2472). First, we calibrate by taking photos of the tank with freshwater and then our stratification. We also make sure to include a ruler in the shot to find the length scale of a pixel in the frame. As we start oscillation, we capture photos at $2 \ \text{Hz}$. This acquisition rate is sufficient to resolve the relatively slow evolution of the internal-wave dynamics.
 
-As internal waves propagate through the stratified fluid, the associated density gradients alter the local refractive index, producing small apparent displacements of the background pattern. These displacements are extracted through image-correlation techniques and converted into refractive-index gradient fields. Using the known relationship between refractive index, density, and salinity, the BOS measurements provide quantitative information about the evolving internal-wave field.
+As internal waves propagate through the stratified fluid, the associated density gradients alter the local refractive index, producing small apparent displacements of the background pattern. These displacements are extracted through image-correlation techniques and converted into refractive-index gradient fields. Using the known relationship between refractive index, density, and salinity, the BOS measurements provide quantitative information about the evolving internal-wave field. The software we use to extract this information is called dpivsoft and can be read about in [the analysis folder](../analysis/scripts/)
 
-The resulting displacement and density-gradient fields enable detailed analysis of wave propagation, dispersion, beam structure, and other dynamical phenomena within the stratified fluid.
+The resulting displacement and density-gradient fields enable detailed analysis of wave propagation, dispersion, beam structure, and other dynamical phenomena within the stratified fluid, which may be seen in the accompanying paper's Fig 2a.
+
+## 5 FFT and Analysis
+
+For further quantitative results, the density-gradient field extracted from BOS imaging may be put through a two-dimensional spatial FFT (Fast Fourier Transform). Transforming the data from physical space $(x,z) to wavenumber space (k,m) reveals the spatial frequencies that contain the most energy. The result is a graph of the spectral peaks that correspond to the most dominant internal-wave modes. To reduce spectral leakage, a windowing method may be used, such as a Hann window. An example of an FFT on the density field is seen in the accompanying paper's Fig 2b. 
