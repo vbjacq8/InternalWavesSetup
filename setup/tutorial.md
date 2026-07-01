@@ -18,6 +18,8 @@ Given these are in place, we begin our first step to produce linear internal wav
 
 The first step in producing linear internal waves is establishing a stable, linearly stratified fluid within the wave tank. One method to do this is using the two-bucket method. Our implementation involves a saltwater resevoir, a freshwater resevoir, two peristaltic pumps, and a bilge pump. Freshwater is slowly pumped into the saltwater resevoir as bilge pumps ensure mixing. The mixture in the saltwater resevoir is then pumped out and into the wave tank at twice the rate as freshwater is pumped into it. We also clamp the tank to stop any bulging effects that can get in the way of our visualization. 
 
+![](/setup/media/TwoBucketDiagram.jpg)
+
 To minimize the turbulence of the wave tank inflow, the inflow pump runs into a sponge diffuser positioned at the water surface.  As the tank fills, the diffuser distributes 
 incoming water evenly and floats upward with the rising water level, allowing the density gradient to develop gradually throughout the depth of the tank.
 
@@ -51,24 +53,24 @@ A simple method for observing the generated waves is shadowgraph imaging. In thi
 
 ## 4 Background-Oriented Schlieren (BOS) Measurements
 
-For quantitative measurements, our primary method is BOS, which utilizes a random dot background pattern positioned behind the tank and multiple high-resolution cameras.
+For quantitative measurements, our primary method is BOS, which utilizes a random dot background pattern positioned behind the tank and multiple high-resolution cameras. While we use a projector to illuminate the random dot pattern, an alternative way to do it is by printing out sheets of paper with the dot pattern and sticking them flat on a backlit board.
 
 ![](media/Cams.jpg)
 
 Our three cameras are synchronized with StreamPix software to image the entire wave field, allowing coverage of the full tank at a resolution near 4K (3296 x 2472). To calibrate, we put a ruler aligned with the inside of the stratified tank, and take photos of it on each camera. Using dpivsoft allows us to find the length scale of a pixel in the frame. As we start oscillation, we capture photos at 2 Hz. This acquisition rate is sufficient to resolve the relatively slow evolution of the internal-wave dynamics.
 
-BOS builds on the same idea as shadowgraphing: internal waves drive density gradients that alter the local refractive index, producing small apparent displacements of the background pattern. In BOS, the displacements are extracted through image-correlation techniques and converted into refractive-index gradient fields. Using the known relationship between refractive index, density, and salinity, the BOS measurements provide quantitative information about the evolving internal-wave field. The software we use to extract this information is called dpivsoft and can be read about in [the analysis folder](../analysis/scripts/)
+BOS builds on the same idea as shadowgraphing: internal waves drive density gradients that alter the local refractive index, producing small apparent displacements of the background pattern. In BOS, the displacements are extracted through image-correlation techniques and converted into refractive-index gradient fields. Using the known relationship between refractive index, density, and salinity, the BOS measurements provide quantitative information about the evolving internal-wave field. The software we use to extract this information is called dpivsoft and can be read about in [the analysis folder](../analysis/scripts/).
 
-The resulting displacement and density-gradient fields enable detailed analysis of wave propagation, dispersion, beam structure, and other dynamical phenomena within the stratified fluid, which may be seen in the accompanying paper's ![Fig 2a](/setup/media/Fig2a.pdf).
+The resulting displacement and density-gradient fields enable detailed analysis of wave propagation, dispersion, beam structure, and other dynamical phenomena within the stratified fluid, which may be seen in the accompanying paper's ![Fig 2a](/setup/media/Fig2a.jpg).
 
 ## 5 FFT and Analysis
 
 ### Wavenumbers
-For further quantitative results, the density-gradient field extracted from BOS imaging may be put through a two-dimensional spatial FFT (Fast Fourier Transform). Transforming the data from physical space $(x,z)$ to wavenumber space $(k,m)$ reveals the spatial frequencies that contain the most energy. The result is a graph of the spectral peaks that correspond to the most dominant internal-wave modes. To reduce spectral leakage, a windowing method may be used, such as a Hanning window. An example of an FFT on the density field is seen in the accompanying paper's ![Fig 2b](/setup/media/Fig2b.pdf).
+For further quantitative results, the density-gradient field extracted from BOS imaging may be put through a two-dimensional spatial FFT (Fast Fourier Transform). Transforming the data from physical space $(x,z)$ to wavenumber space $(k,m)$ reveals the spatial frequencies that contain the most energy. The result is a graph of the spectral peaks that correspond to the most dominant internal-wave modes. To reduce spectral leakage, a windowing method may be used, such as a Hanning window. An example of an FFT on the density field is seen in the accompanying paper's ![Fig 2b](/setup/media/Fig2b.jpg).
 
 
 ### Wedge Spectrum
-In Appendix A, we present an alternative method of looking at the data. While ![Fig 2b](/setup/media/Fig2b.pdf) finds the distribution of energy based on wavenumber, we can visualize the distribution of energy along angles by taking the 2D FFT results and taking the average of the spectra at each specific ratio of $m/k$. For more information, see the [analysis folder](/analysis/).
+In Appendix A, we present an alternative method of looking at the data. While ![Fig 2b](/setup/media/Fig2b.jpg) finds the distribution of energy based on wavenumber, we can visualize the distribution of energy along angles by taking the 2D FFT results and taking the average of the spectra at each specific ratio of $m/k$. For more information, see the [analysis folder](/analysis/).
 
 
 
